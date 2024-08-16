@@ -167,6 +167,7 @@
             <div class="image-box" id="websocket-image-container">
                 <!-- <h2>WebSocket Image</h2> -->
                 <img id="websocket-image" src="" alt="WebSocket Image">
+                <span id="camera-guid">Camera GUID</span>
             </div>
             <div class="image-box" id="ai-results-container">
                 <h2>AI Results</h2>
@@ -187,6 +188,7 @@
         const URL = "./model/";
         let model, maxPredictions;
         const { guidDevice } = getQueryParams();
+        const guidElement = document.getElementById('camera-guid');
 
         function getQueryParams() {
             const params = new URLSearchParams(window.location.search);
@@ -266,6 +268,7 @@
                     const websocketImage = document.getElementById('websocket-image');
                     websocketImage.src = `https://smartparking.pptik.id/data/data/${data.value}`;
                     predictFromImageUrl(websocketImage.src);
+                    guidElement.textContent = `${data.datetime} ${data.guid_device}`;
                 }
             };
 
